@@ -1,39 +1,27 @@
-import { StatusBar } from 'expo-status-bar';
-import { Button, StyleSheet, Text, View } from 'react-native';
+import * as React from 'react';
+import 'react-native-gesture-handler';
 
-import genreService from './src/services/genres';
-import { useEffect, useState } from 'react';
+import { NavigationContainer } from '@react-navigation/native';
+import { createDrawerNavigator } from '@react-navigation/drawer';
 
-export default function App() {
-  const [genres, setGenres] = useState([]);
+import Home from './src/views/Home';
+import Genre from './src/views/Genre';
 
-  useEffect(async () => {
-    const data = await genreService.getAllGenres();
-    setGenres(data);
-  }, []);
+const Drawer = createDrawerNavigator();
 
-  async function updateGenres() {
-    const data = await genreService.getAllGenres();
-    setGenres(data);
-  }
-
+function MainDrawer() {
   return (
-    <View style={styles.container}>
-      <Text>Meus gêneros de filmes!</Text>
-      {genres.map((genre) => (
-        <Text key={genre.id}>{genre.name}</Text>
-      ))}
-      <Button title="Atualizar" onPress={() => updateGenres()} />
-      <StatusBar style="auto" />
-    </View>
+    <Drawer.Navigator>
+      <Drawer.Screen name="Home" component={Home} />
+      <Drawer.Screen name="Gêneros" component={Genre} />
+    </Drawer.Navigator>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+export default function App() {
+  return (
+    <NavigationContainer>
+      <MainDrawer />
+    </NavigationContainer>
+  );
+}
