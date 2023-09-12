@@ -1,5 +1,6 @@
 import * as React from 'react';
 import 'react-native-gesture-handler';
+import { PaperProvider } from 'react-native-paper';
 
 import { NavigationContainer } from '@react-navigation/native';
 import { createDrawerNavigator } from '@react-navigation/drawer';
@@ -11,10 +12,12 @@ const Drawer = createDrawerNavigator();
 
 function MainDrawer() {
   return (
-    <Drawer.Navigator>
-      <Drawer.Screen name="Home" component={Home} />
-      <Drawer.Screen name="Gêneros" component={Genre} />
-    </Drawer.Navigator>
+    <PaperProvider>
+      <Drawer.Navigator>
+        <Drawer.Screen name="Home" component={Home} />
+        <Drawer.Screen name="Gêneros" component={Genre} />
+      </Drawer.Navigator>
+    </PaperProvider>
   );
 }
 

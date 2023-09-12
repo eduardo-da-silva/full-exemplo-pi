@@ -1,5 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
-import { Button, StyleSheet, Text, TextInput, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
+import { Button, Text, TextInput } from 'react-native-paper';
 
 import genreService from '../services/genres';
 import { useState } from 'react';
@@ -14,9 +15,17 @@ export default function GenreAdd({ navigation }) {
 
   return (
     <View style={styles.container}>
-      <Text>Novo Gênero!</Text>
-      <TextInput onChangeText={(text) => setGenre({ name: text })} />
-      <Button title="Salvar" onPress={() => addGenre()} />
+      <Text style={styles.title} variant="headlineMedium">
+        Novo Gênero
+      </Text>
+      <TextInput
+        label="Gênero"
+        style={{ width: '90%', marginBottom: 10 }}
+        onChangeText={(text) => setGenre({ name: text })}
+      />
+      <Button icon="content-save" mode="elevated" onPress={() => addGenre()}>
+        Salvar
+      </Button>
       <StatusBar style="auto" />
     </View>
   );
@@ -27,6 +36,10 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#fff',
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'top',
+  },
+  title: {
+    marginTop: 20,
+    marginBottom: 20,
   },
 });
