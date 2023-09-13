@@ -24,6 +24,43 @@ cd full-exemplo-pi
 code .
 ```
 
+### Projeto `backend` (Django DRF com PDM)
+
+```bash
+# Navegue até a pasta do projeto `backend`
+cd backend
+
+# Instale as dependências do projeto
+pdm install
+
+# Inicie o servidor de desenvolvimento
+pdm run python manage.py runserver 0.0.0.0:19003
+```
+
+## Descobrindo o IP da sua máquina
+
+Para que os projetos `app` e `web` possam se comunicar com o projeto `backend`, é necessário descobrir o IP da sua máquina. Para isso, execute o seguinte comando:
+
+```bash
+ipconfig
+```
+
+## Alterando a baseURL
+
+Para que os projetos `app` e `web` possam se comunicar com o projeto `backend`, é necessário alterar a baseURL de cada um deles.
+
+Procure pela baseURL no arquivo `app/src/services/api.js` e `web/src/services/api.js` e altere para o IP da sua máquina.
+
+## Alterando o `package.json`
+
+Para que o projeto `web` possam se comunicar com o projeto `backend`, é necessário alterar o `package.json` dele. 
+
+- Altere a seguinte linha:
+
+```json
+   "start": "expo start --port 19000",
+```
+
 ## Configurando e Executando os Projetos
 
 Aqui estão as instruções para configurar e iniciar cada um dos projetos:
@@ -52,19 +89,6 @@ npm install
 
 # Inicie o servidor de desenvolvimento
 npm run dev --host
-```
-
-### Projeto `backend` (Django DRF com PDM)
-
-```bash
-# Navegue até a pasta do projeto `backend`
-cd backend
-
-# Instale as dependências do projeto
-pdm install
-
-# Inicie o servidor de desenvolvimento
-pdm run python manage.py runserver
 ```
 
 > Certifique-se de seguir as instruções específicas para cada projeto. Após a execução desses comandos, os projetos estarão configurados e em execução em seu ambiente local.
