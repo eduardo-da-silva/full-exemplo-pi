@@ -11,10 +11,11 @@ from drf_spectacular.views import (
 )
 
 from uploader.router import router as uploader_router
-from movies.views import GenreViewSet
+from movies.views import GenreViewSet, MovieViewSet
 
 router = DefaultRouter()
 router.register("genres", GenreViewSet)
+router.register("movies", MovieViewSet)
 
 urlpatterns = [
     path("admin/", admin.site.urls),

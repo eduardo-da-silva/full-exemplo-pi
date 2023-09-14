@@ -87,7 +87,7 @@ USE_TZ = True
 CORS_ALLOW_ALL_ORIGINS = True  # corsheaders
 
 STATIC_URL = "static/"
-MEDIA_URL = "http://localhost:8000/media/"
+MEDIA_URL = "http://localhost:19003/media/"
 MEDIA_ENDPOINT = "/media/"
 MEDIA_ROOT = os.path.join(BASE_DIR, "media/")
 FILE_UPLOAD_PERMISSIONS = 0o640
