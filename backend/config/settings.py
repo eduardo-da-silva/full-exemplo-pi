@@ -1,9 +1,14 @@
 import os
 from pathlib import Path
 
+from dotenv import load_dotenv
+load_dotenv()
+
+MODE = os.getenv("MODE")
+
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-SECRET_KEY = "django-insecure-cm#w@jy)$d63238kl4*7vy290vk_-+ego!3k89a5!2lo21vzv!"
+SECRET_KEY = os.getenv("SECRET_KEY")
 DEBUG = True
 ALLOWED_HOSTS = ["*"]
 
@@ -87,8 +92,21 @@ USE_TZ = True
 CORS_ALLOW_ALL_ORIGINS = True  # corsheaders
 
 STATIC_URL = "static/"
-MEDIA_URL = "http://localhost:19003/media/"
 MEDIA_ENDPOINT = "/media/"
+if MODE == "development":
+    from subprocess import run, PIPE
+    COMMAND = "nmcli device show | grep IP4.ADDRESS | head -1 | awk '{print $2}' | rev | cut -c 4- | rev"
+    result = run(
+        COMMAND,
+        check=False,
+        stdout=PIPE,
+        stderr=PIPE,
+        universal_newlines=True,
+        shell=True
+    )
+    ip_addr = result.stdout.strip()
+    MEDIA_URL = f"http://{ip_addr}:19003/media/"
+
 MEDIA_ROOT = os.path.join(BASE_DIR, "media/")
 FILE_UPLOAD_PERMISSIONS = 0o640
 
