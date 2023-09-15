@@ -25,6 +25,7 @@ class MovieSerializer(serializers.ModelSerializer):
 
 class MovieDetailSerializer(serializers.ModelSerializer):
     cover = ImageSerializer(required=False)
+    genre = serializers.CharField(source="genre.name")
 
     class Meta:
         model = Movie
