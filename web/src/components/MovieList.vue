@@ -22,6 +22,7 @@ onMounted(async () => {
           <p>{{ movie.year }}</p>
           <div class="rating">
             <StarIcon v-for="n in movie.rating" :key="n" fillColor="orange" size="18" />
+            <StarIcon v-for="n in 5 - movie.rating" :key="n" fillColor="gray" size="18" />
           </div>
         </div>
         <p>{{ movie.genre }}</p>
