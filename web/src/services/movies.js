@@ -5,19 +5,15 @@ class MovieService {
     const response = await api.get('/movies/')
     return response.data
   }
-  // async saveGenre(genre) {
-  //   let response
-  //   if (genre.id) {
-  //     response = await api.put(`/genres/${genre.id}/`, genre)
-  //   } else {
-  //     response = await api.post('/genres/', genre)
-  //   }
-  //   return response.data
-  // }
-  // async deleteGenre(genre) {
-  //   const response = await api.delete(`/genres/${genre.id}/`)
-  //   return response.data
-  // }
+  async saveMovie(movie) {
+    let response
+    if (movie.id) {
+      response = await api.put(`/movies/${movie.id}/`, movie)
+    } else {
+      response = await api.post('/movies/', movie)
+    }
+    return response.data
+  }
 }
 
 export default new MovieService()

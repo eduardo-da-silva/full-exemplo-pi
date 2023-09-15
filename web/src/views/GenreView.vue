@@ -37,15 +37,18 @@ function editGenre(genre) {
 <template>
   <h2>Gêneros de filmes</h2>
   <div class="row center">
-    <div class="form">
+    <form class="form">
       <div class="row">
-        <input type="text" v-model="currentGenre.name" @keyup.enter="save" />
+        <div class="row form-item">
+          <input type="text" placeholder="Gênero" v-model="currentGenre.name" @keyup.enter="save" />
+          <label for="">Gênero</label>
+        </div>
         <button @click="save">
           <ContentSaveIcon />
           Salvar
         </button>
       </div>
-    </div>
+    </form>
   </div>
   <div class="row center">
     <table>
