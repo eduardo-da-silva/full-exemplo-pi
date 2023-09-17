@@ -1,17 +1,14 @@
 import os
+from dotenv import load_dotenv
 from pathlib import Path
 
-from dotenv import load_dotenv
 load_dotenv()
 
 MODE = os.getenv("MODE")
-
 BASE_DIR = Path(__file__).resolve().parent.parent
-
 SECRET_KEY = os.getenv("SECRET_KEY")
 DEBUG = True
 ALLOWED_HOSTS = ["*"]
-
 
 INSTALLED_APPS = [
     "django.contrib.admin",
@@ -58,7 +55,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = "config.wsgi.application"
 
-
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.sqlite3",
@@ -92,8 +88,12 @@ USE_TZ = True
 CORS_ALLOW_ALL_ORIGINS = True  # corsheaders
 
 STATIC_URL = "static/"
+MEDIA_URL = "/media/"
 MEDIA_ENDPOINT = "/media/"
-if MODE == "development":
+MEDIA_ROOT = os.path.join(BASE_DIR, "media/")
+FILE_UPLOAD_PERMISSIONS = 0o640
+
+if MODE == "DEVELOPMENT":
     from subprocess import run, PIPE
     COMMAND = "nmcli device show | grep IP4.ADDRESS | head -1 | awk '{print $2}' | rev | cut -c 4- | rev"
     result = run(
@@ -107,8 +107,7 @@ if MODE == "development":
     ip_addr = result.stdout.strip()
     MEDIA_URL = f"http://{ip_addr}:19003/media/"
 
-MEDIA_ROOT = os.path.join(BASE_DIR, "media/")
-FILE_UPLOAD_PERMISSIONS = 0o640
+print(MODE, MEDIA_URL)
 
 REST_FRAMEWORK = {
     "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
