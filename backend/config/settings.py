@@ -94,18 +94,9 @@ MEDIA_ROOT = os.path.join(BASE_DIR, "media/")
 FILE_UPLOAD_PERMISSIONS = 0o640
 
 if MODE == "DEVELOPMENT":
-    from subprocess import run, PIPE
-    COMMAND = "nmcli device show | grep IP4.ADDRESS | head -1 | awk '{print $2}' | rev | cut -c 4- | rev"
-    result = run(
-        COMMAND,
-        check=False,
-        stdout=PIPE,
-        stderr=PIPE,
-        universal_newlines=True,
-        shell=True
-    )
-    ip_addr = result.stdout.strip()
-    MEDIA_URL = f"http://{ip_addr}:19003/media/"
+    MY_IP = os.getenv("MY_IP", "127.0.0.1")
+
+    MEDIA_URL = f"http://{MY_IP}:19003/media/"
 
 print(MODE, MEDIA_URL)
 
