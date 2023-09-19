@@ -6,6 +6,7 @@ import { Dropdown } from 'react-native-element-dropdown';
 
 import genreService from '../services/genres';
 import imageService from '../services/images';
+import movieService from '../services/movies';
 
 export default function MovieAdd({ navigation }) {
   const [isFocus, setIsFocus] = useState(false);
@@ -32,11 +33,14 @@ export default function MovieAdd({ navigation }) {
 
   const save = async () => {
     const image = await imageService.uploadImage(file);
+    console.log(image);
     setMovie((movie) => ({
       ...movie,
       cover_attachment_key: image.attachment_key,
     }));
-    await movieService.saveMovie(movie);
+    console.log(movie);
+    const data = await movieService.saveMovie(movie);
+    console.log(data);
     navigation.goBack();
   };
 
@@ -78,7 +82,7 @@ export default function MovieAdd({ navigation }) {
         label="Avaliação"
         style={{ width: '90%', marginBottom: 10 }}
         onChangeText={(text) =>
-          setMovie((movie) => ({ ...movie, ranking: text }))
+          setMovie((movie) => ({ ...movie, rating: text }))
         }
       />
       <Dropdown
@@ -94,7 +98,7 @@ export default function MovieAdd({ navigation }) {
         onFocus={() => setIsFocus(true)}
         onBlur={() => setIsFocus(false)}
         onChange={(item) => {
-          setMovie((movie) => ({ ...movie, genre: item }));
+          setMovie((movie) => ({ ...movie, genre: item.id }));
           setIsFocus(false);
         }}
       />
