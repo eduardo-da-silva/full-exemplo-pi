@@ -12,7 +12,9 @@ Antes de começar, certifique-se de ter as seguintes ferramentas instaladas em s
 
 - [Node.js](https://nodejs.org/) (para o projeto `app` e `web`).
 - [Python](https://www.python.org/) (para o projeto `backend`).
-- [PDM](https://pdm.fming.dev/) (Python Development Mode) - É altamente recomendável para gerenciar as dependências do projeto `backend`.
+- [PDM](https://pdm.fming.dev/): 
+- nmcli (para descobrir o IP da sua máquina).
+  - Para instalar no Ubuntu: `sudo apt install nmcli`.
 
 ## Clonando o Repositório
 
