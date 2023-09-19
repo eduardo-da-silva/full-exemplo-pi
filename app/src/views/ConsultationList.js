@@ -4,7 +4,7 @@ import { StyleSheet, Text, View } from "react-native";
 export default function ConsultationList() {
   return (
     <View style={styles.container}>
-      <Text>Consulta</Text>
+      <Text>Lista da Consulta</Text>
       <StatusBar style="auto" />
     </View>
   );

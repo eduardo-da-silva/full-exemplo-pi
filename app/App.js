@@ -6,10 +6,9 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 
 import Home from "./src/views/Home";
-import AnimalList from "./src/views/AnimalList";
-import ConsultationList from "./src/views/ConsultationList";
 import User from "./src/views/User";
-
+import Animal from "./src/views/Animal";
+import Consultaition from "./src/views/Consultation";
 
 const Drawer = createDrawerNavigator();
 
@@ -18,8 +17,8 @@ function MainDrawer() {
     <PaperProvider>
       <Drawer.Navigator>
         <Drawer.Screen name="Home" component={Home} />
-        <Drawer.Screen name="Animal" component={AnimalList} />
-        <Drawer.Screen name="Consulta" component={ConsultationList} />
+        <Drawer.Screen name="Animal" component={Animal} />
+        <Drawer.Screen name="Consulta" component={Consultaition} />
         <Drawer.Screen name="User" component={User} />
       </Drawer.Navigator>
     </PaperProvider>
