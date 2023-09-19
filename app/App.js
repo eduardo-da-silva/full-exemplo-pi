@@ -7,6 +7,7 @@ import { createDrawerNavigator } from '@react-navigation/drawer';
 
 import Home from './src/views/Home';
 import Genre from './src/views/Genre';
+import Movie from './src/views/Movie';
 
 const Drawer = createDrawerNavigator();
 
@@ -16,6 +17,7 @@ function MainDrawer() {
       <Drawer.Navigator>
         <Drawer.Screen name="Home" component={Home} />
         <Drawer.Screen name="Gêneros" component={Genre} />
+        <Drawer.Screen name="Filmes" component={Movie} />
       </Drawer.Navigator>
     </PaperProvider>
   );
