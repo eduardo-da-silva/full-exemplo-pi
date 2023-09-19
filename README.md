@@ -26,26 +26,39 @@ cd full-exemplo-pi
 code .
 ```
 
-### Projeto `backend` (Django DRF com PDM)
+## Projeto `backend` (Django DRF com PDM)
 
 ```bash
 # Navegue até a pasta do projeto `backend`
 cd backend
 
 # Instale as dependências do projeto
+sudo apt install python3-pip
+pip install netifaces
 pdm install
-
-# Inicie o servidor de desenvolvimento
-pdm run python manage.py runserver 0.0.0.0:19003
 ```
 
-## Descobrindo o IP da sua máquina
 
-Para que os projetos `app` e `web` possam se comunicar com o projeto `backend`, é necessário descobrir o IP da sua máquina. Para isso, execute o seguinte comando:
+### Descobrindo o IP da sua máquina
+
+Para que os projetos `app` e `web` possam se comunicar com o projeto `backend`, é necessário descobrir e configurar o IP da sua máquina. 
+
+- Execute o seguinte comando, para descobrir o IP da sua máquina e configurá-lo no arquivo `.env`:
+
+```bash
+pdm run set_my_ip.py
+```
+
+> Caso o comando acima não funcione, você pode descobrir o IP da sua máquina manualmente, e configurá-lo no arquivo `.env`.
+
+- Para descobrir o IP, execute o seguinte comando:
 
 ```bash
 ipconfig
 ```
+
+- Coloque o IP descoberto no arquivo `.env`, na variável `MY_IP`.
+
 
 ## Alterando a baseURL
 
