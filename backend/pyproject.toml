@@ -18,3 +18,14 @@ requires-python = ">=3.10"
 readme = "README.md"
 license = {text = "MIT"}
 
+[tool.pdm.scripts]
+dev = "python manage.py runserver 0.0.0.0:19003"
+runserver = "python manage.py runserver"
+createsuperuser = "python manage.py createsuperuser"
+migrate = "python manage.py migrate"
+makemigrations = "python manage.py makemigrations"
+shell = "python manage.py shell"
+test = "python manage.py test"
+startapp = "python manage.py startapp {args}"
+loaddata = "python manage.py loaddata {args}"
+dumpdata = "python manage.py dumpdata {args}"
