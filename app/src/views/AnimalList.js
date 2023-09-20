@@ -5,7 +5,7 @@ import AnimalService from "../services/animals";
 
 export default function AnimalsList({ navigation }) {
   const [refreshing, setRefreshing] = useState(false);
-  const [Animals, setAnimals] = useState([]);
+  const [animals, setAnimals] = useState([]);
 
   const fetchAnimals = async () => {
     const data = await AnimalService.getAllAnimals();
@@ -30,44 +30,103 @@ export default function AnimalsList({ navigation }) {
         }
       >
         {animals.map((animal) => (
-          <Card style={styles.card} key={animal.id}>
+          <Card style={styles.CardAnimal} key={animal.id}>
             <Card.Content>
-              <Text variant="titleLarge">{animal.title}</Text>
-              <Text variant="bodyMedium">
-                {animal.genre} ({animal.year})
-              </Text>
+              <View style={styles.CardPart}>
+                <View style={styles.CardImagem}>
+                  <Text>Foto</Text>
+                </View>
+                <View style={styles.CardDados}>
+                  <View style={styles.CardDetalhes}>
+                    <Text>{animal.nome}</Text>
+                    <Text>{animal.idade}</Text>
+                    <Text>{animal.status}</Text>
+                    <Text>{animal.peso}</Text>
+                  </View>
+                  <View style={styles.CardSlash} />
+                  <View style={styles.CardDetalhes}>
+                    <Text>?</Text>
+                    <Text>?</Text>
+                    <Text>?</Text>
+                    <Text>?</Text>
+                  </View>
+                </View>
+              </View>
+              <View style={styles.CardSlash2} />
+              <View style={styles.CardPart2}>
+                <View style={styles.CardConsulta}>
+                  <Text>Consulta</Text>
+                </View>
+                <View style={styles.CardConsulta}>
+                  <Text>Consulta 2</Text>
+                </View>
+              </View>
             </Card.Content>
-            <Card.Cover
-              style={styles.cover}
-              source={{ uri: animal.cover.url }}
-            />
           </Card>
         ))}
       </ScrollView>
-      <FAB
-        icon="plus"
-        style={styles.fab}
-        onPress={() => navigation.navigate("AnimalDetail")}
-      />
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-  },
-  card: {
+  CardAnimal: {
+    width: "100",
+    height: "auto",
+    backgroundColor: "#667338",
+    padding: 10,
+    borderRadius: 15,
+    alignItems: "center",
     margin: 10,
   },
-  cover: {
-    height: 400,
+  CardPart: {
+    width: "100%",
+    height: "50%",
+    flexDirection: "row",
   },
-  fab: {
-    position: "absolute",
-    margin: 16,
-    right: 0,
-    bottom: 0,
+  CardImagem: {
+    height: 100,
+    width: 100,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  CardDados: {
+    width: "75%",
+    padding: 10,
+    flexDirection: "row",
+  },
+  CardDetalhes: {
+    width: "50%",
+    textAlign: "center",
+    padding: 5,
+  },
+  CardSlash: {
+    width: 1,
+    height: "100%",
+    textAlign: "center",
+    backgroundColor: "black",
+  },
+  CardSlash2: {
+    width: "100%",
+    height: 1,
+    margin: 2,
+    textAlign: "center",
+    backgroundColor: "black",
+  },
+  CardPart2: {
+    width: "100%",
+    height: "50%",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  CardConsulta: {
+    width: "100%",
+    height: "40%",
+    padding: 10,
+    margin: 5,
+    backgroundColor: "#525A35",
+    borderRadius: 15,
+    justifyContent: "center",
+    alignItems: "center",
   },
 });

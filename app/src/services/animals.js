@@ -2,7 +2,7 @@ import api from "../plugins/api";
 
 class AnimalService {
   async getAllAnimals() {
-    const response = await api.get("/animals/");
+    const response = await api.get("/animais/");
     return response.data;
   }
 }

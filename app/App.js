@@ -16,8 +16,8 @@ function MainDrawer() {
   return (
     <PaperProvider>
       <Drawer.Navigator>
-        <Drawer.Screen name="Home" component={Home} />
         <Drawer.Screen name="Animal" component={Animal} />
+        <Drawer.Screen name="Home" component={Home} />
         <Drawer.Screen name="Consulta" component={Consultaition} />
         <Drawer.Screen name="User" component={User} />
       </Drawer.Navigator>
