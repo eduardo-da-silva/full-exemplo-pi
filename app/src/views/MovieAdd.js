@@ -1,14 +1,17 @@
 import { useState, useEffect } from 'react';
 import * as ImagePicker from 'expo-image-picker';
-import { StyleSheet, Image, View } from 'react-native';
+import { StyleSheet, Image, View, ScrollView } from 'react-native';
 import { Button, TextInput } from 'react-native-paper';
 import { Dropdown } from 'react-native-element-dropdown';
+import { useTheme } from 'react-native-paper';
 
 import genreService from '../services/genres';
 import imageService from '../services/images';
 import movieService from '../services/movies';
 
 export default function MovieAdd({ navigation }) {
+  const theme = useTheme();
+
   const [isFocus, setIsFocus] = useState(false);
 
   const [selectedImage, setSelectedImage] = useState(null);
@@ -33,14 +36,11 @@ export default function MovieAdd({ navigation }) {
 
   const save = async () => {
     const image = await imageService.uploadImage(file);
-    console.log(image);
     setMovie((movie) => ({
       ...movie,
       cover_attachment_key: image.attachment_key,
     }));
-    console.log(movie);
     const data = await movieService.saveMovie(movie);
-    console.log(data);
     navigation.goBack();
   };
 
@@ -59,53 +59,86 @@ export default function MovieAdd({ navigation }) {
   };
 
   return (
-    <View style={styles.container}>
+    <ScrollView style={styles.container}>
       {selectedImage && (
-        <Image source={{ uri: selectedImage }} style={styles.image} />
+        <Image
+          source={{ uri: selectedImage }}
+          style={styles.image}
+          onPress={pickImageAsync}
+        />
       )}
-      <Button mode="contained" onPress={pickImageAsync}>
-        Selecionar imagem
-      </Button>
-      <TextInput
-        label="Título"
-        style={{ width: '90%', marginBottom: 10 }}
-        onChangeText={(text) =>
-          setMovie((movie) => ({ ...movie, title: text }))
-        }
-      />
-      <TextInput
-        label="Ano de Lançamento"
-        style={{ width: '90%', marginBottom: 10 }}
-        onChangeText={(text) => setMovie((movie) => ({ ...movie, year: text }))}
-      />
-      <TextInput
-        label="Avaliação"
-        style={{ width: '90%', marginBottom: 10 }}
-        onChangeText={(text) =>
-          setMovie((movie) => ({ ...movie, rating: text }))
-        }
-      />
-      <Dropdown
-        style={[styles.dropdown, isFocus && { borderColor: 'blue' }]}
-        placeholderStyle={styles.placeholderStyle}
-        selectedTextStyle={styles.selectedTextStyle}
-        data={genres}
-        maxHeight={300}
-        labelField="name"
-        valueField="id"
-        placeholder={isFocus ? '...' : 'Selecionar Gênero'}
-        value={movie.genre}
-        onFocus={() => setIsFocus(true)}
-        onBlur={() => setIsFocus(false)}
-        onChange={(item) => {
-          setMovie((movie) => ({ ...movie, genre: item.id }));
-          setIsFocus(false);
-        }}
-      />
-      <Button mode="contained" onPress={save}>
-        Adicionar
-      </Button>
-    </View>
+      {!selectedImage && (
+        <View style={styles.buttons}>
+          <Button mode="contained" onPress={pickImageAsync}>
+            Selecionar imagem
+          </Button>
+        </View>
+      )}
+      <View style={{ marginHorizontal: 10 }}>
+        <TextInput
+          label="Título"
+          style={{ marginBottom: 10 }}
+          onChangeText={(text) =>
+            setMovie((movie) => ({ ...movie, title: text }))
+          }
+        />
+        <TextInput
+          label="Ano de Lançamento"
+          style={{ marginBottom: 10 }}
+          onChangeText={(text) =>
+            setMovie((movie) => ({ ...movie, year: text }))
+          }
+        />
+        <TextInput
+          label="Avaliação"
+          style={{ marginBottom: 10 }}
+          onChangeText={(text) =>
+            setMovie((movie) => ({ ...movie, rating: text }))
+          }
+        />
+        <Dropdown
+          style={[
+            styles.dropdown,
+            {
+              backgroundColor: theme.colors.surfaceVariant,
+            },
+            isFocus && {
+              borderBottomColor: theme.colors.primary,
+              borderBottomWidth: 1.5,
+            },
+          ]}
+          containerStyle={[
+            {
+              backgroundColor: theme.colors.surfaceVariant,
+            },
+          ]}
+          placeholderStyle={styles.placeholderStyle}
+          itemContainerStyle={[
+            {
+              backgroundColor: theme.colors.surfaceVariant,
+            },
+          ]}
+          selectedTextStyle={styles.selectedTextStyle}
+          data={genres}
+          maxHeight={300}
+          labelField="name"
+          valueField="id"
+          placeholder={isFocus ? '...' : 'Selecionar Gênero'}
+          value={movie.genre}
+          onFocus={() => setIsFocus(true)}
+          onBlur={() => setIsFocus(false)}
+          onChange={(item) => {
+            setMovie((movie) => ({ ...movie, genre: item.id }));
+            setIsFocus(false);
+          }}
+        />
+      </View>
+      <View style={styles.buttons}>
+        <Button mode="contained" onPress={save}>
+          Adicionar
+        </Button>
+      </View>
+    </ScrollView>
   );
 }
 
@@ -118,17 +151,18 @@ const styles = StyleSheet.create({
     width: 200,
     height: 200,
     alignSelf: 'center',
+    marginBottom: 20,
   },
   dropdown: {
-    height: 50,
-    borderColor: 'gray',
-    borderWidth: 0.5,
-    borderRadius: 8,
+    height: 55,
+    borderBottomColor: '#000a',
+    borderBottomWidth: 0.8,
+    borderTopRadius: 4,
     paddingHorizontal: 8,
-    width: '80%',
   },
   placeholderStyle: {
-    fontSize: 16,
+    fontSize: 14,
+    color: '#000a',
   },
   selectedTextStyle: {
     fontSize: 16,
@@ -136,5 +170,11 @@ const styles = StyleSheet.create({
   inputSearchStyle: {
     height: 40,
     fontSize: 16,
+  },
+  buttons: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    marginTop: 20,
+    marginBottom: 20,
   },
 });
