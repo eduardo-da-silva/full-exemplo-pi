@@ -20,10 +20,10 @@ def get_current_ip():
 # Função para atualizar o arquivo .env com o novo IP
 def update_env_file(ip):
     try:
-        with open('../.env', 'r') as file:
+        with open('.env', 'r') as file:
             lines = file.readlines()
         
-        with open('../.env', 'w') as file:
+        with open('.env', 'w') as file:
             for line in lines:
                 if line.startswith('MY_IP='):
                     continue

@@ -98,9 +98,6 @@ if MODE == "DEVELOPMENT":
 else:
     MEDIA_URL = "/media/"
 
-
-print(MODE, MEDIA_URL)
-
 REST_FRAMEWORK = {
     "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
 }
@@ -110,3 +107,6 @@ SPECTACULAR_SETTINGS = {
     "DESCRIPTION": "API exemplo do Projeto de PI (Movies Management).",
     "VERSION": "1.0.0",
 }
+
+
+print(MODE, MY_IP, MEDIA_URL)

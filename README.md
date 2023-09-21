@@ -33,11 +33,9 @@ code .
 cd backend
 
 # Instale as dependências do projeto
-sudo apt install python3-pip
-pip install netifaces
-pdm install
+sudo apt install python3-dev
+pdm install netifaces
 ```
-
 
 ### Descobrindo o IP da sua máquina
 
@@ -49,7 +47,7 @@ Para que os projetos `app` e `web` possam se comunicar com o projeto `backend`, 
 pdm run set_my_ip.py
 ```
 
-> Caso o comando acima não funcione, você pode descobrir o IP da sua máquina manualmente, e configurá-lo no arquivo `.env`.
+> **Caso o comando acima não funcione**, você pode descobrir o IP da sua máquina manualmente, e configurá-lo no arquivo `.env`.
 
 - Para descobrir o IP, execute o seguinte comando:
 
@@ -62,9 +60,16 @@ ipconfig
 
 ## Alterando a baseURL
 
-Para que os projetos `app` e `web` possam se comunicar com o projeto `backend`, é necessário alterar a baseURL de cada um deles.
+Para que os projetos `app` e `web` possam se comunicar com o projeto `backend`, é necessário alterar a `baseURL` de cada um deles.
 
-Procure pela baseURL no arquivo `app/src/services/api.js` e `web/src/services/api.js` e altere para o IP da sua máquina.
+
+Nos projetos `app` e `web`, execute o seguinte comando:
+
+```bash
+node set_my_ip.js
+```
+
+> **Se não fucionar**, altere manualmente a `baseURL` de cada projeto, colocando o IP da sua máquina.
 
 ## Alterando o `package.json`
 
@@ -103,7 +108,7 @@ cd web
 npm install
 
 # Inicie o servidor de desenvolvimento
-npm run dev --host
+npm run dev
 ```
 
 > Certifique-se de seguir as instruções específicas para cada projeto. Após a execução desses comandos, os projetos estarão configurados e em execução em seu ambiente local.
