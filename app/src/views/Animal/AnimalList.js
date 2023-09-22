@@ -1,7 +1,7 @@
 import { useEffect, useState, useCallback } from "react";
 import { Card, Text, FAB } from "react-native-paper";
 import { RefreshControl, StyleSheet, ScrollView, View } from "react-native";
-import AnimalService from "../services/animals";
+import AnimalService from "../../services/animals";
 
 export default function AnimalsList({ navigation }) {
   const [refreshing, setRefreshing] = useState(false);
