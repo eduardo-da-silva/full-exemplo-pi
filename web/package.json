@@ -3,6 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
+    "predev": "node ./scripts/set_my_ip.js",
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",

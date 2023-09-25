@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "main": "node_modules/expo/AppEntry.js",
   "scripts": {
+    "prestart": "node ./scripts/set_my_ip.js",
     "start": "expo start --port 19000",
     "android": "expo start --android",
     "ios": "expo start --ios",
