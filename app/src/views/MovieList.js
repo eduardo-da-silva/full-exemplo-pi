@@ -1,11 +1,15 @@
 import { useEffect, useState, useCallback } from 'react';
 import { Card, Text, FAB } from 'react-native-paper';
 import { RefreshControl, StyleSheet, ScrollView, View } from 'react-native';
+import { useRecoilValue } from 'recoil';
+
 import movieService from '../services/movies';
+import { userState } from '../recoil/atoms/auth';
 
 export default function MovieList({ navigation }) {
   const [refreshing, setRefreshing] = useState(false);
   const [movies, setMovies] = useState([]);
+  const currentUserState = useRecoilValue(userState);
 
   const fetchMovies = async () => {
     const data = await movieService.getAllMovies();
@@ -44,11 +48,13 @@ export default function MovieList({ navigation }) {
           </Card>
         ))}
       </ScrollView>
-      <FAB
-        icon="plus"
-        style={styles.fab}
-        onPress={() => navigation.navigate('MovieAdd')}
-      />
+      {currentUserState.loggedIn && (
+        <FAB
+          icon="plus"
+          style={styles.fab}
+          onPress={() => navigation.navigate('MovieAdd')}
+        />
+      )}
     </View>
   );
 }
