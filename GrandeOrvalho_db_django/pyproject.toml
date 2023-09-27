@@ -15,8 +15,19 @@ dependencies = [
     "django-extensions>=3.2.3",
     "pydotplus>=2.0.2",
     "drf-spectacular>=0.26.5",
+    "python-dotenv>=1.0.0",
 ]
 requires-python = ">=3.10"
 license = {text = "MIT"}
 
-[tool.pdm]
+[tool.pdm.scripts]
+dev = "python manage.py runserver"
+runserver = "python manage.py runserver"
+createsuperuser = "python manage.py createsuperuser"
+migrate = "python manage.py migrate"
+makemigrations = "python manage.py makemigrations"
+shell = "python manage.py shell"
+test = "python manage.py test"
+startapp = "python manage.py startapp {args}"
+loaddata = "python manage.py loaddata {args}"
+dumpdata = "python manage.py dumpdata {args}"
