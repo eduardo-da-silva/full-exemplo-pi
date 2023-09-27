@@ -12,6 +12,11 @@ dependencies = [
     "django-cors-headers>=4.2.0",
     "djangorestframework-simplejwt>=5.3.0",
     "setuptools>=68.1.2",
+    "django-extensions>=3.2.3",
+    "pydotplus>=2.0.2",
+    "drf-spectacular>=0.26.5",
 ]
 requires-python = ">=3.10"
 license = {text = "MIT"}
+
+[tool.pdm]

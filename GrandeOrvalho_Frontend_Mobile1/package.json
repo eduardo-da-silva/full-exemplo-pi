@@ -13,6 +13,7 @@
     "@react-navigation/drawer": "^6.6.3",
     "@react-navigation/native": "^6.1.7",
     "@react-navigation/native-stack": "^6.9.13",
+    "@types/react-native-snap-carousel": "^3.8.5",
     "axios": "^1.4.0",
     "expo": "~49.0.5",
     "expo-image-picker": "~14.3.2",
@@ -27,6 +28,7 @@
     "react-native-paper-select": "^1.0.2",
     "react-native-reanimated": "~3.3.0",
     "react-native-safe-area-context": "4.6.3",
+    "react-native-snap-carousel": "^3.9.1",
     "react-native-vector-icons": "^10.0.0",
     "react-native-web": "~0.19.6"
   },

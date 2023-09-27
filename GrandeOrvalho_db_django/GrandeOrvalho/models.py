@@ -25,15 +25,6 @@ class Cliente(models.Model):
     def __str__(self):
         return f"{self.nome} ({self.telefone})"
     
-class Consulta(models.Model):
-    descricao = models.CharField(max_length=150)
-    data = models.DateField()
-    hora = models.TimeField()
-    
-    
-    def __str__(self):
-        return self.descricao
-    
 class Especie(models.Model):
     nome = models.CharField(max_length=50)
     
@@ -84,3 +75,15 @@ class Animais(models.Model):
         
     def __str__(self):
         return self.nome
+
+class Consulta(models.Model):
+    descricao = models.CharField(max_length=150)
+    data = models.DateField()
+    hora = models.TimeField()
+    
+    animais = models.ForeignKey(
+        Animais, on_delete=models.PROTECT, related_name="consultas"
+    )
+    
+    def __str__(self):
+        return self.descricao
