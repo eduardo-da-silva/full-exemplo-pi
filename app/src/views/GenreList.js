@@ -13,7 +13,7 @@ export default function GenreAdd({ navigation }) {
     setGenres(data);
   };
 
-  useEffect(async () => {
+  useEffect(() => {
     getGenres();
   }, []);
 
