@@ -3,6 +3,8 @@ from django.db import models
 from .cliente import Cliente
 from .raca import Raca
 
+from uploader.models import Image
+
 class Animais(models.Model):
     SEXO_CHOICES = (
         ("F", "Feminino"),
@@ -21,6 +23,14 @@ class Animais(models.Model):
     )
     raca = models.ForeignKey(
         Raca, on_delete=models.PROTECT, related_name="animais"   
+    )
+    capa = models.ForeignKey(
+        Image,
+        related_name="+",
+        on_delete=models.CASCADE,
+        null=True,
+        blank=True,
+        default=None,
     )
     
     class Meta:
