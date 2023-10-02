@@ -18,10 +18,7 @@ class Image(models.Model):
         max_length=255,
         default=uuid.uuid4,
         unique=True,
-        help_text=(
-            "Used to attach the image to another object. "
-            "Cannot be used to retrieve the image file."
-        ),
+        help_text=("Used to attach the image to another object. " "Cannot be used to retrieve the image file."),
     )
     public_id = models.UUIDField(
         max_length=255,

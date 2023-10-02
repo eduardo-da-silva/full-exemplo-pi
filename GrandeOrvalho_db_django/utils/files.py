@@ -1,6 +1,7 @@
 import magic
-#file_magic = magic.Magic(magic_file="C:\Windows\magic\magic.mgc")
-#Caso esteja no windows
+
+# file_magic = magic.Magic(magic_file="C:\Windows\magic\magic.mgc")
+# Caso esteja no windows
 
 CONTENT_TYPE_ICO = "image/x-icon"
 CONTENT_TYPE_JPG = "image/jpeg"
