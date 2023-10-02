@@ -23,7 +23,8 @@ requires-python = ">=3.10"
 license = {text = "MIT"}
 
 [tool.pdm.scripts]
-dev = "python manage.py runserver"
+pre_dev = "python ./scripts/set_my_ip.py"
+dev = "python manage.py runserver 0.0.0.0:19003"
 runserver = "python manage.py runserver"
 createsuperuser = "python manage.py createsuperuser"
 migrate = "python manage.py migrate"
