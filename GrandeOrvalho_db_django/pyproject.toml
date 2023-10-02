@@ -42,3 +42,7 @@ dev = [
 
 [tool.black]
 line-length = 120
+
+[[tool.pdm.autoexport]]
+filename = "requirements.txt"
+without-hashes = "true"
