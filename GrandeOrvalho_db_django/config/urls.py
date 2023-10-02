@@ -14,15 +14,15 @@ from drf_spectacular.views import (
     SpectacularSwaggerView,
 )
 
-from GrandeOrvalho.views import FuncionarioViewSet, ClienteViewSet, ConsultaViewSet, EspecieViewSet, RacaViewSet, AnimaisViewSet
+from GrandeOrvalho.views import AnimaisViewSet, ClienteViewSet, ConsultaViewSet, EspecieViewSet, FuncionarioViewSet, RacaViewSet
 
 router = DefaultRouter()
-router.register(r"funcionarios", FuncionarioViewSet)
+router.register(r"animais", AnimaisViewSet)
 router.register(r"clientes", ClienteViewSet)
 router.register(r"consultas", ConsultaViewSet)
 router.register(r"espécies", EspecieViewSet)
+router.register(r"funcionarios", FuncionarioViewSet)
 router.register(r"raças", RacaViewSet)
-router.register(r"animais", AnimaisViewSet)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
