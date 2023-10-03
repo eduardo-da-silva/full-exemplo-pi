@@ -1,17 +1,15 @@
 import os
 from dotenv import load_dotenv
+from datetime import timedelta
 
 from pathlib import Path
 
 load_dotenv()
 
-MODE = os.getenv("MODE")
-
-SECRET_KEY = os.getenv("SECRET_KEY")
-DEBUG = os.getenv("DEBUG", "False")
+MODE = os.getenv("MODE", "DEVELOPMENT")
+SECRET_KEY = os.getenv("SECRET_KEY", "django-insecure-4@5j^6^0^4)0%_7n4&-!-#(m*2x^8!$3+^)w5&z!5^_5p!j5")
+DEBUG = True
 ALLOWED_HOSTS = ["*"]
-CSRF_TRUSTED_ORIGINS = ["http://localhost:3000", "http://localhost:8000", "https://*.fl0.io/"]
-
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -163,3 +161,8 @@ if MODE in ["PRODUCTION", "MIGRATE"]:
 else:    
     MY_IP = os.getenv("MY_IP", "127.0.0.1")
     MEDIA_URL = f"http://{MY_IP}:19003/media/"
+    
+SIMPLE_JWT = {
+    "ACCESS_TOKEN_LIFETIME": timedelta(minutes=180),
+    "REFRESH_TOKEN_LIFETIME":timedelta(days=1),
+}
