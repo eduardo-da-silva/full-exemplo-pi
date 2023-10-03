@@ -25,7 +25,8 @@ export default function Login({ navigation }) {
       setPassword('');
       setErrorMsg(null);
       await SecureStore.setItemAsync('access', data.access);
-      navigation.goBack();
+      await SecureStore.setItemAsync('refresh', data.refresh);
+      navigation.navigate('Home');
     } catch (error) {
       setUser({ loggedIn: false, access: null, refresh: null });
       setErrorMsg('Usuário ou senha inválidos!');
