@@ -1,22 +1,22 @@
 <script>
-import ConsultasApi from "@/api/consultas.js";
+import ConsultasApi from "@/services/consultas.js";
+import AnimaisApi from "../services/animais";
 const consultasApi = new ConsultasApi();
+const animaisApi = new AnimaisApi();
 export default {
   data() {
     return {
-      consulta: {},
       consultas: [],
-      novo_nome: "",
+      consulta: {},
+      animais: [],
     };
   },
   async created() {
     this.consulta = await consultasApi.buscarTodasAsConsultas();
+    this.animal = await animaisApi.buscarTodosOsAnimais();
   },
   methods: {
     async salvar() {
-      this.consultas.push({
-        Nome: this.novo_nome,
-      });
       if (this.consulta.id) {
         await consultasApi.atualizarConsulta(this.consulta);
       } else {
@@ -41,14 +41,6 @@ export default {
       <h2>Consultas</h2>
     </div>
     <div class="consulta-input">
-      <input 
-        placeholder="Nome do paciente:"
-        type="text"
-        v-model="consulta.nome"
-        @keyup.enter="salvar"
-      />
-    </div>
-    <div class="consulta-input">
       <input
         placeholder="Descrição:"
         type="text"
@@ -59,7 +51,7 @@ export default {
     <div class="consulta-input">
       <input
         placeholder="Data:"
-        type="text"
+        type="date"
         v-model="consulta.data"
         @keyup.enter="salvar"
       />
@@ -67,10 +59,16 @@ export default {
     <div class="consulta-input">
       <input
         placeholder="Hora:"
-        type="text"
+        type="time"
         v-model="consulta.hora"
         @keyup.enter="salvar"
       />
+    </div>
+    <div class="consulta-input">
+      <label for="animalSelect">Animal:</label>
+      <select id="animalSelect" v-model="consulta.animais">
+        <option v-for="animal in animais" :key="animal.id" :value="animal.id">{{ animal.name }}</option>
+      </select>
     </div>
 
     <div id="salvar">
@@ -81,19 +79,19 @@ export default {
         <thead>
           <tr>
             <th>ID</th>
-            <th>Nome</th>
             <th>Descrição</th>
             <th>Data</th>
             <th>Hora</th>
+            <th>Animal</th>
           </tr>
         </thead>
         <tbody>
           <tr v-for="consulta in consultas" :key="consulta.id">
             <td>{{ consulta.id }}</td>
-            <td>{{ consulta.nome }}</td>
             <td>{{ consulta.descricao }}</td>
             <td>{{ consulta.data }}</td>
             <td>{{ consulta.hora }}</td>
+            <td>{{ consulta.animais }}</td>
             <td>
               <button class="excluir" @click="excluir(consulta)">Excluir</button>
             </td>

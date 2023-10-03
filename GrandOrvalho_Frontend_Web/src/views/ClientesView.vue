@@ -1,11 +1,11 @@
 <script>
-import ClientesApi from "@/api/clientes.js";
+import ClientesApi from "@/services/clientes.js";
 const clientesApi = new ClientesApi();
 export default {
   data() {
     return {
-      cliente: {},
       clientes: [],
+      cliente: {},
     };
   },
   async created() {
@@ -37,10 +37,10 @@ export default {
       <h2>Clientes</h2>
     </div>
     <div class="cliente-input">
-      <input type="text" placeholder="nome" v-model="cliente.nome" @keyup.enter="salvar" />
+      <input type="text" placeholder="nome" v-model="cliente.name" @keyup.enter="salvar" />
+      <input type="number" placeholder="cpf" v-model="cliente.cpf" @keyup.enter="salvar" />
       <input type="email" placeholder="email" v-model="cliente.email" @keyup.enter="salvar" />
-      <input type="senha" placeholder="senha" v-model="cliente.senha" @keyup.enter="salvar" />
-      <input type="tel" placeholder="telefone" v-model="cliente.tel" @keyup.enter="salvar" />
+      <input type="number" placeholder="telefone" v-model="cliente.tel" @keyup.enter="salvar" />
       <button @click="salvar">Salvar</button>
     </div>
     <div class="cliente-form">
@@ -49,17 +49,17 @@ export default {
           <tr>
             <th>ID</th>
             <th>Nome</th>
+            <th>CPF</th>
             <th>Email</th>
-            <th>Senha</th>
             <th>Telefone</th>
           </tr>
         </thead>
         <tbody>
           <tr v-for="cliente in clientes" :key="cliente.id">
             <td>{{ cliente.id }}</td>
-            <td>{{ cliente.nome }}</td>
+            <td>{{ cliente.name }}</td>
+            <td>{{ cliente.cpf }}</td>
             <td>{{ cliente.email }}</td>
-            <td>{{ cliente.senha }}</td>
             <td>{{ cliente.tel }}</td>
             <td>
               <button class="excluir" @click="excluir(cliente)">excluir</button>

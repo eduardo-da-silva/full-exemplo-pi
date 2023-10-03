@@ -3,7 +3,7 @@
 <template>
   <article id="home">
     <div class="text">
-      Bem vindo a Uranos Bookshop espero que tenha um otimo dia de trabalho
+      Vetrinaria Grande Orvalho
     </div>
   </article>
 </template>
