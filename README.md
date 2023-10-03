@@ -12,9 +12,7 @@ Antes de começar, certifique-se de ter as seguintes ferramentas instaladas em s
 
 - [Node.js](https://nodejs.org/) (para o projeto `app` e `web`).
 - [Python](https://www.python.org/) (para o projeto `backend`).
-- [PDM](https://pdm.fming.dev/): 
-- nmcli (para descobrir o IP da sua máquina).
-  - Para instalar no Ubuntu: `sudo apt install nmcli`.
+- [PDM](https://pdm.fming.dev/) (para o projeto `backend`).
 
 ## Clonando o Repositório
 
@@ -37,41 +35,7 @@ sudo apt install python3-dev
 pdm install netifaces
 ```
 
-### Descobrindo o IP da sua máquina
-
-Para que os projetos `app` e `web` possam se comunicar com o projeto `backend`, é necessário descobrir e configurar o IP da sua máquina. 
-
-- Execute o seguinte comando, para descobrir o IP da sua máquina e configurá-lo no arquivo `.env`:
-
-```bash
-pdm run set_my_ip.py
-```
-
-> **Caso o comando acima não funcione**, você pode descobrir o IP da sua máquina manualmente, e configurá-lo no arquivo `.env`.
-
-- Para descobrir o IP, execute o seguinte comando:
-
-```bash
-ipconfig
-```
-
-- Coloque o IP descoberto no arquivo `.env`, na variável `MY_IP`.
-
-
-## Alterando a baseURL
-
-Para que os projetos `app` e `web` possam se comunicar com o projeto `backend`, é necessário alterar a `baseURL` de cada um deles.
-
-
-Nos projetos `app` e `web`, execute o seguinte comando:
-
-```bash
-node set_my_ip.js
-```
-
-> **Se não fucionar**, altere manualmente a `baseURL` de cada projeto, colocando o IP da sua máquina.
-
-## Alterando o `package.json`
+## Alterando o `package.json` no projeto `web`
 
 Para que o projeto `web` possam se comunicar com o projeto `backend`, é necessário alterar o `package.json` dele. 
 
@@ -84,6 +48,15 @@ Para que o projeto `web` possam se comunicar com o projeto `backend`, é necess�
 ## Configurando e Executando os Projetos
 
 Aqui estão as instruções para configurar e iniciar cada um dos projetos:
+
+## Projeto `backend` (Django DRF com PDM)
+
+```bash
+# Navegue até a pasta do projeto `backend`
+cd backend
+pdm install
+pdm run dev
+```
 
 ### Projeto `app` (React Native)
 
