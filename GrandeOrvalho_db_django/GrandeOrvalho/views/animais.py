@@ -10,6 +10,7 @@ from GrandeOrvalho.serializers import (
 
 class AnimaisViewSet(ModelViewSet):
     queryset = Animais.objects.all()
+    serializer_class = AnimalDetailSerializer, AnimalListSerializer, AnimalSerializer,
 
     def get_serializer_class(self):
         if self.action in "list":
