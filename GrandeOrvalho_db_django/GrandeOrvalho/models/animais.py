@@ -20,10 +20,7 @@ class Animais(models.Model):
     capa = models.ForeignKey(
         Image,
         related_name="+",
-        on_delete=models.CASCADE,
-        null=True,
-        blank=True,
-        default=None,
+        on_delete=models.PROTECT,
     )
 
     class Meta:

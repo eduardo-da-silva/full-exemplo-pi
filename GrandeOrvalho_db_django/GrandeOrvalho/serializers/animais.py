@@ -6,10 +6,6 @@ from uploader.serializers import ImageSerializer
 
 
 class AnimalSerializer(ModelSerializer):
-    class Meta:
-        model = Animais
-        fields = "__all__"
-
     capa_attachment_key = SlugRelatedField(
         source="capa",
         queryset=Image.objects.all(),
@@ -19,17 +15,23 @@ class AnimalSerializer(ModelSerializer):
     )
     capa = ImageSerializer(required=False, read_only=True)
 
+    class Meta:
+        model = Animais
+        fields = "__all__"
+
 
 class AnimalDetailSerializer(ModelSerializer):
+    capa = ImageSerializer(required=False)
+    
     class Meta:
         model = Animais
         fields = "__all__"
         depth = 1
 
-    capa = ImageSerializer(required=False)
-
 
 class AnimalListSerializer(ModelSerializer):
+    capa = ImageSerializer(required=False)    
+    
     class Meta:
         model = Animais
         fields = ["id", "nome", "peso", "status"]
