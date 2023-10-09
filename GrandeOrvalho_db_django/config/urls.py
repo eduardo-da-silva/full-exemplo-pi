@@ -2,14 +2,16 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import include, path
+from uploader.router import router as uploader_router
+from usuario.router import router as usuario_router
 
+from rest_framework.routers import DefaultRouter
+from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 from drf_spectacular.views import (
     SpectacularAPIView,
     SpectacularRedocView,
     SpectacularSwaggerView,
 )
-from rest_framework.routers import DefaultRouter
-from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 
 from GrandeOrvalho.views import (
     AnimaisViewSet,
@@ -19,8 +21,6 @@ from GrandeOrvalho.views import (
     FuncionarioViewSet,
     RacaViewSet,
 )
-from uploader.router import router as uploader_router
-from usuario.router import router as usuario_router
 
 router = DefaultRouter()
 router.register(r"animais", AnimaisViewSet)
