@@ -7,10 +7,16 @@ from pathlib import Path
 load_dotenv()
 
 MODE = os.getenv("MODE", "DEVELOPMENT")
-SECRET_KEY = os.getenv("SECRET_KEY", "django-insecure-4@5j^6^0^4)0%_7n4&-!-#(m*2x^8!$3+^)w5&z!5^_5p!j5")
+SECRET_KEY = os.getenv(
+    "SECRET_KEY", "django-insecure-4@5j^6^0^4)0%_7n4&-!-#(m*2x^8!$3+^)w5&z!5^_5p!j5"
+)
 DEBUG = os.getenv("DEBUG", "False")
 ALLOWED_HOSTS = ["*"]
-CSRF_TRUSTED_ORIGINS = ["http://localhost:3000", "http://localhost:8000", "https://*.fl0.io/"]
+CSRF_TRUSTED_ORIGINS = [
+    "http://localhost:3000",
+    "http://localhost:8000",
+    "https://*.fl0.io/",
+]
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -62,7 +68,9 @@ MIDDLEWARE = [
 
 REST_FRAMEWORK = {
     # "DEFAULT_PERMISSION_CLASSES": ["rest_framework.permissions.IsAuthenticated",],
-    "DEFAULT_AUTHENTICATION_CLASSES": ("rest_framework_simplejwt.authentication.JWTAuthentication",),
+    "DEFAULT_AUTHENTICATION_CLASSES": (
+        "rest_framework_simplejwt.authentication.JWTAuthentication",
+    ),
     "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
 }
 
@@ -96,12 +104,26 @@ WSGI_APPLICATION = "config.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
-DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
+if MODE in ["PRODUCTION", "MIGRATE"]:
+    DATABASES = {
+        "default": {
+            "ENGINE": "django.db.backends.postgresql",
+            "NAME": os.getenv("DATABASE_NAME"),
+            "USER": os.getenv("DATABASE_USER"),
+            "PASSWORD": os.getenv("DATABASE_PASSWORD"),
+            "HOST": os.getenv("DATABASE_HOST"),
+            "PORT": os.getenv("DATABASE_PORT"),
+        }
     }
-}
+else: 
+    DATABASES = {
+        "default": {
+            "ENGINE": "django.db.backends.sqlite3",
+            "NAME": BASE_DIR / "db.sqlite3",
+        }
+    }
+
+print(MODE, DATABASES)
 
 
 # Password validation
@@ -157,19 +179,19 @@ FILE_UPLOAD_PERMISSIONS = 0o640
 
 
 if MODE in ["PRODUCTION", "MIGRATE"]:
-    MEDIA_URL = '/media/' 
-else:    
+    MEDIA_URL = "/media/"
+else:
     MY_IP = os.getenv("MY_IP", "127.0.0.1")
     MEDIA_URL = f"http://{MY_IP}:19003/media/"
-    
+
 SIMPLE_JWT = {
     "ACCESS_TOKEN_LIFETIME": timedelta(minutes=180),
-    "REFRESH_TOKEN_LIFETIME":timedelta(days=1),
+    "REFRESH_TOKEN_LIFETIME": timedelta(days=1),
 }
 
 if MODE == "PRODUCTION":
     STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
     STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
-
-
+    
 # print(MODE, MEDIA_URL, DATABASES)
+ 
