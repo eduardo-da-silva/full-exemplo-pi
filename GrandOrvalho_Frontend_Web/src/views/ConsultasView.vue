@@ -13,13 +13,15 @@ export default {
   },
   async created() {
     this.consulta = await consultasApi.buscarTodasAsConsultas();
-    this.animal = await animaisApi.buscarTodosOsAnimais();
+    this.animais = await animaisApi.buscarTodosOsAnimais();
+    this.consulta.selectedAnimalId = '';
   },
   methods: {
     async salvar() {
       if (this.consulta.id) {
         await consultasApi.atualizarConsulta(this.consulta);
       } else {
+        this.consulta.animais = this.consulta.selectedAnimalId;
         await consultasApi.adicionarConsulta(this.consulta);
       }
       this.consultas = await consultasApi.buscarTodasAsConsultas();
@@ -66,8 +68,8 @@ export default {
     </div>
     <div class="consulta-input">
       <label for="animalSelect">Animal:</label>
-      <select id="animalSelect" v-model="consulta.animais">
-        <option v-for="animal in animais" :key="animal.id" :value="animal.id">{{ animal.name }}</option>
+      <select id="animalSelect" v-model="consulta.selectedAnimalId">
+        <option v-for="animal in animais" :key="animal.id" :value="animal.id">{{ animal.nome }}</option>
       </select>
     </div>
 
@@ -91,12 +93,13 @@ export default {
             <td>{{ consulta.descricao }}</td>
             <td>{{ consulta.data }}</td>
             <td>{{ consulta.hora }}</td>
-            <td>{{ consulta.animais }}</td>
+            <td>{{ consulta.animal.nome }}</td>
             <td>
               <button class="excluir" @click="excluir(consulta)">Excluir</button>
             </td>
           </tr>
         </tbody>
+
       </table>
     </div>
   </article>

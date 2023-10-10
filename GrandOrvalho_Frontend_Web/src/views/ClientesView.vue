@@ -37,10 +37,10 @@ export default {
       <h2>Clientes</h2>
     </div>
     <div class="cliente-input">
-      <input type="text" placeholder="nome" v-model="cliente.name" @keyup.enter="salvar" />
+      <input type="text" placeholder="nome" v-model="cliente.nome" @keyup.enter="salvar" />
       <input type="number" placeholder="cpf" v-model="cliente.cpf" @keyup.enter="salvar" />
       <input type="email" placeholder="email" v-model="cliente.email" @keyup.enter="salvar" />
-      <input type="number" placeholder="telefone" v-model="cliente.tel" @keyup.enter="salvar" />
+      <input type="number" placeholder="telefone" v-model="cliente.telefone" @keyup.enter="salvar" />
       <button @click="salvar">Salvar</button>
     </div>
     <div class="cliente-form">
@@ -57,10 +57,10 @@ export default {
         <tbody>
           <tr v-for="cliente in clientes" :key="cliente.id">
             <td>{{ cliente.id }}</td>
-            <td>{{ cliente.name }}</td>
+            <td>{{ cliente.nome }}</td>
             <td>{{ cliente.cpf }}</td>
             <td>{{ cliente.email }}</td>
-            <td>{{ cliente.tel }}</td>
+            <td>{{ cliente.telefone }}</td>
             <td>
               <button class="excluir" @click="excluir(cliente)">excluir</button>
             </td>
