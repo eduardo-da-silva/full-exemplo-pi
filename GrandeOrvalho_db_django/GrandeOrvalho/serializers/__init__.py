@@ -4,3 +4,4 @@ from .consulta import ConsultaSerializer
 from .especie import EspecieSerializer
 from .funcionario import FuncionarioSerializer
 from .raca import RacaSerializer
+from .tipo_usuario import TipoUsuarioSerializer
