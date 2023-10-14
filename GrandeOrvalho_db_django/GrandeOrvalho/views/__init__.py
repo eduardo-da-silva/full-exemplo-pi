@@ -4,3 +4,4 @@ from .consulta import ConsultaViewSet
 from .especie import EspecieViewSet
 from .funcionario import FuncionarioViewSet
 from .raca import RacaViewSet
+from .tipo_usuario import TipoUsuarioViewSet
