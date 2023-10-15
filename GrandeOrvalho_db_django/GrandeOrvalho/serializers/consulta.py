@@ -1,4 +1,4 @@
-from rest_framework.serializers import ModelSerializer
+from rest_framework.serializers import ModelSerializer, ReadOnlyField
 
 from GrandeOrvalho.models import Consulta
 

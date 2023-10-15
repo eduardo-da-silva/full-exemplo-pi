@@ -127,13 +127,18 @@ MEDIA_ENDPOINT = "/media/"
 MEDIA_ROOT = os.path.join(BASE_DIR, "media/")
 FILE_UPLOAD_PERMISSIONS = 0o640
 
-
 if MODE in ["PRODUCTION", "MIGRATE"]:    
     CLOUDINARY_URL = os.getenv("CLOUDINARY_URL")
     DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
     STATIC_ROOT = os.path.join(BASE_DIR, "static")
     STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
     MEDIA_URL = '/media/' 
+else:    
+    MY_IP = os.getenv("MY_IP", "127.0.0.1")
+    MEDIA_URL = f"http://{MY_IP}:19003/media/"
+    
+
+if MODE in ["PRODUCTION", "MIGRATE"]:    
     DATABASES = {
         "default": {
             "ENGINE": "django.db.backends.postgresql",
@@ -142,11 +147,9 @@ if MODE in ["PRODUCTION", "MIGRATE"]:
             "PASSWORD": os.getenv("DATABASE_PASSWORD"),
             "HOST": os.getenv("DATABASE_HOST"),
             "PORT": os.getenv("DATABASE_PORT"),
+        }
     }
-}
 else:    
-    MY_IP = os.getenv("MY_IP", "127.0.0.1")
-    MEDIA_URL = f"http://{MY_IP}:19003/media/"
     DATABASES = {
         "default": {
             "ENGINE": "django.db.backends.sqlite3",
@@ -154,12 +157,12 @@ else:
         }
     }
     
-print(MODE, MEDIA_URL, DATABASES)
+print(MODE, DATABASES)
     
 SIMPLE_JWT = {
     "ACCESS_TOKEN_LIFETIME": timedelta(minutes=180),
     "REFRESH_TOKEN_LIFETIME": timedelta(days=1),
-}
+}    
 
 if MODE == "PRODUCTION":
     STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
