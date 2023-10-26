@@ -1,19 +1,22 @@
-import api from '../plugins/api'
+import api from '../plugins/api';
 
 class MovieService {
   async getAllMovies() {
-    const response = await api.get('/movies/')
-    return response.data
+    const response = await api.get('/movies/');
+    return response.data;
   }
+
+  // async getMoviesByGenreId(genreId) {
+
   async saveMovie(movie) {
-    let response
+    let response;
     if (movie.id) {
-      response = await api.put(`/movies/${movie.id}/`, movie)
+      response = await api.put(`/movies/${movie.id}/`, movie);
     } else {
-      response = await api.post('/movies/', movie)
+      response = await api.post('/movies/', movie);
     }
-    return response.data
+    return response.data;
   }
 }
 
-export default new MovieService()
+export default new MovieService();

@@ -1,5 +1,5 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, ScrollView, View } from 'react-native';
 import { Text, Button, List } from 'react-native-paper';
 
 import genreService from '../services/genres';
@@ -17,18 +17,18 @@ export default function GenreAdd({ navigation }) {
     getGenres();
   }, []);
 
+  useEffect(() => {
+    for (const genre of genres) {
+      console.log(genre.name);
+    }
+  }, [genres]);
+
   const updateGenres = async () => {
     await getGenres();
   };
 
   return (
-    <View style={styles.container}>
-      <Text variant="headlineMedium">Gêneros de Filmes</Text>
-      <>
-        {genres.map((genre) => (
-          <List.Item key={genre.id} title={genre.name} />
-        ))}
-      </>
+    <ScrollView style={styles.container}>
       <View style={styles.buttons}>
         <Button icon="reload" mode="elevated" onPress={() => updateGenres()}>
           Atualizar
@@ -41,8 +41,14 @@ export default function GenreAdd({ navigation }) {
           Adicionar
         </Button>
       </View>
+      <>
+        {genres.map((genre) => (
+          <List.Item key={genre.id} title={genre.name} />
+        ))}
+      </>
+
       <StatusBar style="auto" />
-    </View>
+    </ScrollView>
   );
 }
 
@@ -50,8 +56,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'top',
   },
   buttons: {
     flexDirection: 'row',

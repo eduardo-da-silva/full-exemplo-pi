@@ -10,13 +10,12 @@ class GenreViewSet(viewsets.ModelViewSet):
 
     def get_permissions(self):
         if self.action == 'list':
-            permission_classes = [AllowAny]
-        return [permission() for permission in permission_classes]
-
+            return [AllowAny()]
+        return super().get_permissions()
 class MovieViewSet(viewsets.ModelViewSet):
     queryset = Movie.objects.all()  # pylint: disable = E1101
     serializer_class = MovieSerializer
-    permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticated()]
 
     def get_serializer_class(self):
         if self.action in ["retrieve", "list"]:
