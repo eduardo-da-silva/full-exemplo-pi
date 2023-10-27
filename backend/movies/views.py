@@ -15,7 +15,7 @@ class GenreViewSet(viewsets.ModelViewSet):
 class MovieViewSet(viewsets.ModelViewSet):
     queryset = Movie.objects.all()  # pylint: disable = E1101
     serializer_class = MovieSerializer
-    permission_classes = [IsAuthenticated()]
+    permission_classes = [IsAuthenticated]
 
     def get_serializer_class(self):
         if self.action in ["retrieve", "list"]:
