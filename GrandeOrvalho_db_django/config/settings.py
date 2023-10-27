@@ -122,7 +122,7 @@ AUTH_USER_MODEL = "usuario.Usuario"
 CORS_ALLOW_ALL_ORIGINS = True
 
 STATIC_URL = "/static/"
-MEDIA_URL = "http://localhost:8000/media/"
+MEDIA_URL = "/media/"
 MEDIA_ENDPOINT = "/media/"
 MEDIA_ROOT = os.path.join(BASE_DIR, "media/")
 FILE_UPLOAD_PERMISSIONS = 0o640
@@ -157,7 +157,7 @@ else:
         }
     }
     
-print(MODE, DATABASES)
+print(MODE, MEDIA_URL, DATABASES)
     
 SIMPLE_JWT = {
     "ACCESS_TOKEN_LIFETIME": timedelta(minutes=180),

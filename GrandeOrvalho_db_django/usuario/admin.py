@@ -22,7 +22,7 @@ class CustomUserAdmin(UserAdmin):
         "is_active",
     )
     fieldsets = (
-        (None, {"fields": ("email", "password")}),
+        (None, {"fields": ("user", "email", "password")}),
         (
             _("Personal info"),
             {
@@ -48,6 +48,7 @@ class CustomUserAdmin(UserAdmin):
             {
                 "classes": ("wide",),
                 "fields": (
+                    "user",
                     "email",
                     "password1",
                     "password2",
@@ -59,6 +60,6 @@ class CustomUserAdmin(UserAdmin):
             },
         ),
     )
-    search_fields = ("email",)
-    ordering = ("email",)
+    search_fields = ("user", "email",)
+    ordering = ("user", "email",)
     readonly_fields = ["date_joined", "last_login"]
