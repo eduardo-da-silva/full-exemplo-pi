@@ -10,9 +10,19 @@ const user = reactive({
   password: ''
 })
 
-function login() {
-  authStore.login({ ...user })
+function closeForm() {
   showForm.value = false
+  user.username = ''
+  user.password = ''
+}
+
+async function login() {
+  try {
+    await authStore.login({ ...user })
+    closeForm()
+  } catch (error) {
+    alert('Usuário ou senha inválidos')
+  }
 }
 </script>
 
@@ -32,20 +42,20 @@ function login() {
     </template>
     <template #body>
       <form class="form">
-        <div class="formGroup">
+        <div class="form-item">
+          <input type="text" placeholder="Usuário" id="username" v-model="user.username" />
           <label for="username">Usuário</label>
-          <input type="text" id="username" v-model="user.username" />
         </div>
-        <div class="formGroup">
+        <div class="form-item">
+          <input type="password" placeholder="Senha" id="password" v-model="user.password" />
           <label for="password">Senha</label>
-          <input type="password" id="password" v-model="user.password" />
         </div>
       </form>
     </template>
     <template #footer>
       <div class="footerButtons">
-        <button @click="showForm = false">Cancelar</button>
-        <button class="saveButton" @click="login">Login</button>
+        <button @click="closeForm">Cancelar</button>
+        <button class="loginButton" @click="login">Login</button>
       </div>
     </template>
   </modal>
@@ -85,5 +95,25 @@ nav a:hover {
 
 nav a:first-of-type {
   border: 0;
+}
+
+.loginButton {
+  height: 2rem;
+  align-self: center;
+  margin-left: 3rem;
+  background-color: #080;
+  color: white;
+  justify-content: space-around;
+}
+
+.footerButtons {
+  display: flex;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1rem;
+  row-gap: 0.5rem;
 }
 </style>

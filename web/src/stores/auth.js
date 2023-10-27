@@ -5,7 +5,7 @@ import authService from '../services/auth'
 export const useAuthStore = defineStore('auth', () => {
   const state = reactive({
     token: null,
-    loggedIn: true
+    loggedIn: false
   })
 
   const loggedIn = computed(() => state.loggedIn)
@@ -19,6 +19,7 @@ export const useAuthStore = defineStore('auth', () => {
     } catch (error) {
       state.token = null
       state.loggedIn = false
+      return Promise.reject(error)
     }
   }
 
