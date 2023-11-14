@@ -6,7 +6,7 @@ groups = ["default"]
 cross_platform = true
 static_urls = false
 lock_version = "4.3"
-content_hash = "sha256:348f1a95577209617a5c03bb60528b95697714a1431eb81b27a04581105fef55"
+content_hash = "sha256:395ad62b4fdff853dcc9b138f36381edb5f131d8fc7539061fab6554af618382"
 
 [[package]]
 name = "asgiref"
@@ -360,6 +360,16 @@ files = [
     {file = "rpds_py-0.10.3-pp39-pypy39_pp73-musllinux_1_2_i686.whl", hash = "sha256:4eca20917a06d2fca7628ef3c8b94a8c358f6b43f1a621c9815243462dcccf97"},
     {file = "rpds_py-0.10.3-pp39-pypy39_pp73-musllinux_1_2_x86_64.whl", hash = "sha256:e8d0f0eca087630d58b8c662085529781fd5dc80f0a54eda42d5c9029f812599"},
     {file = "rpds_py-0.10.3.tar.gz", hash = "sha256:fcc1ebb7561a3e24a6588f7c6ded15d80aec22c66a070c757559b57b17ffd1cb"},
+]
+
+[[package]]
+name = "setuptools"
+version = "68.2.2"
+requires_python = ">=3.8"
+summary = "Easily download, build, install, upgrade, and uninstall Python packages"
+files = [
+    {file = "setuptools-68.2.2-py3-none-any.whl", hash = "sha256:b454a35605876da60632df1a60f736524eb73cc47bbc9f3f1ef1b644de74fd2a"},
+    {file = "setuptools-68.2.2.tar.gz", hash = "sha256:4ac1475276d2f1c48684874089fefcd83bd7162ddaafb81fac866ba0db282a87"},
 ]
 
 [[package]]

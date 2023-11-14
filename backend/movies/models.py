@@ -17,3 +17,19 @@ class Movie(models.Model):
 
     def __str__(self):
         return f"{self.title} ({self.year})"
+
+
+class Person(models.Model):
+    name = models.CharField(max_length=100)
+    birth_date = models.DateField()
+    birth_place = models.CharField(max_length=100)
+    bio = models.TextField()
+
+
+class CastingMember(models.Model):
+    movie = models.ForeignKey(Movie, on_delete=models.PROTECT, related_name="casting")
+    person = models.ForeignKey(Person, on_delete=models.PROTECT, related_name="movies")
+    role = models.CharField(max_length=100)
+
+    def __str__(self):
+        return f"{self.person.name} as {self.role} in {self.movie.title}"

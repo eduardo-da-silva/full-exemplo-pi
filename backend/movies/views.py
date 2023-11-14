@@ -1,7 +1,7 @@
 from rest_framework import viewsets
 from rest_framework.permissions import AllowAny, IsAuthenticated, DjangoModelPermissions
-from movies.models import Genre, Movie
-from movies.serializers import GenreSerializer, MovieSerializer, MovieDetailSerializer
+from movies.models import Genre, Movie, Person, CastingMember
+from movies.serializers import GenreSerializer, MovieSerializer, MovieDetailSerializer, PersonSerializer
 
 
 class GenreViewSet(viewsets.ModelViewSet):
@@ -21,3 +21,8 @@ class MovieViewSet(viewsets.ModelViewSet):
         if self.action in ["retrieve", "list"]:
             return MovieDetailSerializer
         return super().get_serializer_class()
+
+class PersonViewSet(viewsets.ModelViewSet):
+    queryset = Person.objects.all()  # pylint: disable = E1101
+    serializer_class = PersonSerializer
+    permission_classes = [AllowAny]

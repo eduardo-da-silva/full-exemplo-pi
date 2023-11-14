@@ -16,11 +16,12 @@ from rest_framework_simplejwt.views import (
 )
 
 from uploader.router import router as uploader_router
-from movies.views import GenreViewSet, MovieViewSet
+from movies.views import GenreViewSet, MovieViewSet, PersonViewSet
 
 router = DefaultRouter()
 router.register("genres", GenreViewSet)
 router.register("movies", MovieViewSet)
+router.register("persons", PersonViewSet)
 
 urlpatterns = [
     path("admin/", admin.site.urls),
